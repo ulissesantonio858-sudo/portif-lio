@@ -169,16 +169,19 @@ export const CONTACT = {
   text: 'Conta-me o que fazes, o que precisas e se já tens um site. A partir daí, definimos o próximo passo.',
   topicsLabel: 'Sobre o que queres falar?',
   unsure: 'Ainda não sei',
-  note: 'Abre o LinkedIn e envia-me a mensagem acima. Respondo por lá.',
+  noteWhatsappPrefilled: 'A mensagem segue já escrita no WhatsApp. Respondo por lá.',
+  noteWhatsappCopy: 'Copia a mensagem e cola-a na conversa do WhatsApp. Respondo por lá.',
+  formTitle: 'Preferes email?',
+  formText: 'Deixa os teus dados e a mensagem. Respondo para o email que indicares.',
 }
 
 const TOPIC_PHRASE: Record<ServiceId, string> = {
-  sites: 'um site profissional',
-  landing: 'uma landing page',
-  apps: 'uma aplicação web',
+  sites: 'num site profissional',
+  landing: 'numa landing page',
+  apps: 'numa aplicação web',
 }
 
 export function suggestedMessage(topic: ServiceId | null): string {
   const subject = topic ? TOPIC_PHRASE[topic] : 'criar ou melhorar o meu site'
-  return `Olá Ulisses! Tenho interesse em ${subject}. O meu negócio é … e gostava de conversar sobre o projeto.`
+  return `Olá Ulisses! Tenho interesse ${topic ? subject : `em ${subject}`}. O meu negócio é … e gostava de conversar sobre o projeto.`
 }

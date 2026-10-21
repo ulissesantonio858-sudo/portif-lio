@@ -27,14 +27,25 @@ O `capture` usa o Chrome instalado; noutro browser: `CHROME_PATH=/caminho/chrome
 - **Hero desktop a partir de 1200 px** com as coordenadas do Figma (unidade `100cqw / 1920`). Abaixo disso, composição empilhada; no tablet a imagem usa proporção 0,95 para o enquadramento não mostrar os recortes transparentes do PNG.
 - **Navegação:** Projetos e Depoimentos não aparecem porque não há conteúdo publicável. Ficam “Sobre Mim”, “Serviços” e “Processo”; os outros voltam automaticamente quando houver dados.
 - **Serviços:** abre em *Landing pages* (corrige a incoerência do rascunho). Tabs com setas/Home/End; indicadores sincronizados; “Saber mais” abre um `<dialog>` com ação que leva ao contacto com o interesse pré-selecionado. As ilustrações à esquerda são HTML/CSS, não trabalhos de clientes.
-- **Contacto:** sem email/WhatsApp configurados, o caminho real é “Falar no LinkedIn” + mensagem sugerida copiável. Os botões de email e WhatsApp aparecem sozinhos quando `CONTACT_CONFIG` os tiver.
+- **Contacto:** o WhatsApp é a ação principal (“Falar no WhatsApp”), com o LinkedIn como alternativa. Ao lado, um formulário de email envia para `api/contact.js` (Vercel Function → Resend). O formulário só mostra “enviada” quando o servidor confirma; sem configuração responde que o envio ainda não está ativo e aponta para o WhatsApp. Tem validação no cliente e no servidor, limites de tamanho e um campo-armadilha para robôs.
 - **Tipografia:** Clash Display Medium (500), Semibold (600) e Bold (700), convertidas de OTF para WOFF2, com preload da Medium; Inter 400/500/600 via `@fontsource`. A 1920 px: Developer 647 px (Figma 659, −1,8 %), & 90 px (101), Web Designer 1166 px (1184, −1,5 %), sem ajuste de `letter-spacing`. Nota: `document.fonts.check('500 40px "Clash Display"')` devolve `true` mesmo sem a fonte; o `npm run capture` reporta `clashLoaded`, que verifica faces efetivamente carregadas.
 - **Ícones sociais:** Instagram e WhatsApp na hero; o Facebook aparece quando `CONTACT_CONFIG.facebook` tiver o URL da página.
+
+## Ativar o envio de email (uma vez)
+
+1. Criar conta em https://resend.com e gerar uma API key (permissão “Sending access”).
+2. Na Vercel → projeto → Settings → Environment Variables (Production e Preview):
+   - `RESEND_API_KEY` = a chave;
+   - `CONTACT_TO_EMAIL` = o email onde queres receber as mensagens;
+   - `CONTACT_FROM_EMAIL` (opcional) = remetente de um domínio verificado na Resend. Sem domínio próprio, fica `onboarding@resend.dev`, que só entrega no email da própria conta Resend — por isso usa esse mesmo email em `CONTACT_TO_EMAIL`.
+3. Fazer redeploy e enviar uma mensagem de teste pelo site. Responder ao email recebido deve ir para o email do visitante (`reply_to`).
+
+Em `npm run preview` não há `/api`, por isso o formulário mostra erro localmente; testa-se no deploy da Vercel (ou com `vercel dev`).
 
 ## Pendências
 
 1. **Retrato:** `public/media/hero-ulisses-*.webp` foi gerado a partir de uma cópia WebP (1813 × 1110, com transparência) da composição, não do PNG original de 2,5 MB. Visualmente está bem, mas convém regenerar os dois WebP a partir do PNG original exportado do Figma (nó `163:22`).
-2. **Contactos:** email e Facebook por configurar em `CONTACT_CONFIG`. O WhatsApp usa o link curto `https://w.app/dawotd`, fornecido pelo Ulisses; o domínio `w.app` não está documentado pelo WhatsApp (o oficial é `wa.me`), por isso confirmar que abre a conversa certa. Com um link `wa.me/<número>`, a mensagem sugerida passa a ir pré-preenchida.
+2. **Contactos:** Facebook por configurar (URL da página) e envio de email por ativar (ver acima) em `CONTACT_CONFIG`. O WhatsApp usa o link curto `https://w.app/dawotd`, fornecido pelo Ulisses; o domínio `w.app` não está documentado pelo WhatsApp (o oficial é `wa.me`), por isso confirmar que abre a conversa certa. Com um link `wa.me/<número>`, a mensagem sugerida passa a ir pré-preenchida.
 3. **Projetos:** Elevon.pt está como rascunho (`published: false`): confirmar a descrição da participação (manutenção), tecnologias, URL e imagem antes de publicar.
 4. **Depoimentos:** nenhum; a secção só aparece com testemunhos reais.
 5. **`wordpress.svg`:** o “P” de “WORDPRESS” falta no próprio export do Figma.

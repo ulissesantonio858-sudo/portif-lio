@@ -17,7 +17,7 @@ export function Hero({ links }: { links: NavLink[] }) {
           className="hero__portrait"
           src={media('hero-ulisses-1813.webp')}
           srcSet={`${media('hero-ulisses-960.webp')} 960w, ${media('hero-ulisses-1813.webp')} 1813w`}
-          sizes="(min-width: 1200px) 95vw, (min-width: 900px) 55vw, 100vw"
+          sizes="(min-width: 768px) 95vw, 100vw"
           width={1813}
           height={1110}
           alt="Retrato de Ulisses Antônio, de t-shirt preta, com iluminação roxa"
