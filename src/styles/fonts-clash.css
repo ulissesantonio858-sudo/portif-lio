@@ -1,0 +1,25 @@
+/* Clash Display (Indian Type Foundry, via Fontshare). Licença: public/fonts/LICENSE-ClashDisplay.txt */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+/* Semibold (600) em falta: até existir ClashDisplay-Semibold.woff2, o browser usa a Bold
+   nos títulos a 600. Quando o ficheiro chegar, descomentar:
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
