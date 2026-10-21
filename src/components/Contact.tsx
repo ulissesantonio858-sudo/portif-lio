@@ -2,6 +2,11 @@ import { useState } from 'react'
 import { CONTACT, CONTACT_CONFIG, SERVICES, suggestedMessage, type ServiceId } from '../content/portfolio'
 import { ArrowLink } from './ArrowButton'
 
+// Só links wa.me/<número> aceitam texto pré-preenchido; outros links curtos ficam como estão.
+function whatsappHref(url: string, message: string) {
+  return /^https:\/\/wa\.me\/\d+$/.test(url) ? `${url}?text=${encodeURIComponent(message)}` : url
+}
+
 type Props = { topic: ServiceId | null; onTopic: (t: ServiceId | null) => void }
 
 export function Contact({ topic, onTopic }: Props) {
@@ -67,7 +72,7 @@ export function Contact({ topic, onTopic }: Props) {
               </a>
             )}
             {CONTACT_CONFIG.whatsapp && (
-              <a className="ghost-btn" href={`${CONTACT_CONFIG.whatsapp}?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer">
+              <a className="ghost-btn" href={whatsappHref(CONTACT_CONFIG.whatsapp, message)} target="_blank" rel="noopener noreferrer">
                 WhatsApp
               </a>
             )}

@@ -29,12 +29,12 @@ O `capture` usa o Chrome instalado; noutro browser: `CHROME_PATH=/caminho/chrome
 - **Serviços:** abre em *Landing pages* (corrige a incoerência do rascunho). Tabs com setas/Home/End; indicadores sincronizados; “Saber mais” abre um `<dialog>` com ação que leva ao contacto com o interesse pré-selecionado. As ilustrações à esquerda são HTML/CSS, não trabalhos de clientes.
 - **Contacto:** sem email/WhatsApp configurados, o caminho real é “Falar no LinkedIn” + mensagem sugerida copiável. Os botões de email e WhatsApp aparecem sozinhos quando `CONTACT_CONFIG` os tiver.
 - **Tipografia:** Clash Display Medium (500), Semibold (600) e Bold (700), convertidas de OTF para WOFF2, com preload da Medium; Inter 400/500/600 via `@fontsource`. A 1920 px: Developer 647 px (Figma 659, −1,8 %), & 90 px (101), Web Designer 1166 px (1184, −1,5 %), sem ajuste de `letter-spacing`. Nota: `document.fonts.check('500 40px "Clash Display"')` devolve `true` mesmo sem a fonte; o `npm run capture` reporta `clashLoaded`, que verifica faces efetivamente carregadas.
-- **Ícones sociais:** só o Instagram aparece na hero; Facebook e WhatsApp esperam destino.
+- **Ícones sociais:** Instagram e WhatsApp na hero; o Facebook aparece quando `CONTACT_CONFIG.facebook` tiver o URL da página.
 
 ## Pendências
 
 1. **Retrato:** `public/media/hero-ulisses-*.webp` foi gerado a partir de uma cópia WebP (1813 × 1110, com transparência) da composição, não do PNG original de 2,5 MB. Visualmente está bem, mas convém regenerar os dois WebP a partir do PNG original exportado do Figma (nó `163:22`).
-2. **Contactos:** email, WhatsApp e Facebook por configurar em `CONTACT_CONFIG`.
+2. **Contactos:** email e Facebook por configurar em `CONTACT_CONFIG`. O WhatsApp usa o link curto `https://w.app/dawotd`, fornecido pelo Ulisses; o domínio `w.app` não está documentado pelo WhatsApp (o oficial é `wa.me`), por isso confirmar que abre a conversa certa. Com um link `wa.me/<número>`, a mensagem sugerida passa a ir pré-preenchida.
 3. **Projetos:** Elevon.pt está como rascunho (`published: false`): confirmar a descrição da participação (manutenção), tecnologias, URL e imagem antes de publicar.
 4. **Depoimentos:** nenhum; a secção só aparece com testemunhos reais.
 5. **`wordpress.svg`:** o “P” de “WORDPRESS” falta no próprio export do Figma.

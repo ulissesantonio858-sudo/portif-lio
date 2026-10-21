@@ -16,7 +16,8 @@ export const CONTACT_CONFIG = {
   instagram: 'https://www.instagram.com/ulisses_dev/',
   // Por configurar: não usar valores provisórios.
   email: null as string | null,
-  whatsapp: null as string | null, // formato wa.me, ex.: https://wa.me/351XXXXXXXXX
+  // Link curto fornecido pelo Ulisses. Num link wa.me/<número> a mensagem sugerida é pré-preenchida.
+  whatsapp: 'https://w.app/dawotd' as string | null,
   facebook: null as string | null,
 }
 
