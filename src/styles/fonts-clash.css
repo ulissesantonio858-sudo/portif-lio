@@ -6,8 +6,6 @@
   font-style: normal;
   font-display: swap;
 }
-/* Semibold (600) em falta: até existir ClashDisplay-Semibold.woff2, o browser usa a Bold
-   nos títulos a 600. Quando o ficheiro chegar, descomentar:
 @font-face {
   font-family: 'Clash Display';
   src: url('/fonts/ClashDisplay-Semibold.woff2') format('woff2');
@@ -15,7 +13,6 @@
   font-style: normal;
   font-display: swap;
 }
-*/
 @font-face {
   font-family: 'Clash Display';
   src: url('/fonts/ClashDisplay-Bold.woff2') format('woff2');

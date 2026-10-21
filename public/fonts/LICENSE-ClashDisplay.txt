@@ -1,5 +1,5 @@
 Clash Display — Indian Type Foundry (ITF), distribuída via Fontshare.
-Ficheiros incluídos: ClashDisplay-Medium.woff2, ClashDisplay-Bold.woff2 (convertidos de OTF, sem alterar glifos).
+Ficheiros incluídos: ClashDisplay-Medium.woff2, ClashDisplay-Semibold.woff2, ClashDisplay-Bold.woff2 (convertidos de OTF, sem alterar glifos).
 
 Copyright: Copyright 2021 Indian Type Foundry. All rights reserved.
 Trademark: Clash is a trademark of the Indian Type Foundry.

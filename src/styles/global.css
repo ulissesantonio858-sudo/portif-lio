@@ -337,7 +337,9 @@ button {
 .hero__pitch-title {
   font-size: 22px;
   font-weight: 600;
-  color: #fff;
+  /* Espaçamento e cor medidos no Figma: 412 px de largura a 32 px */
+  letter-spacing: 0.073em;
+  color: #e6dced;
 }
 .hero__pitch-text {
   max-width: 52ch;
@@ -651,7 +653,9 @@ button {
 .services__title {
   font-size: clamp(36px, 3.34vw, 64px);
   font-weight: 600;
-  color: #f3ecff;
+  /* 449 px de largura a 64 px no Figma */
+  letter-spacing: 0.041em;
+  color: #fae2ff;
 }
 .services__intro {
   margin: clamp(20px, 3.5vw, 66px) auto 0;
