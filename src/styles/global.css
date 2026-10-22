@@ -457,7 +457,8 @@ button {
 /* Composição do desktop (também no tablet): coordenadas relativas ao frame de 1920 px */
 @media (min-width: 768px) {
   .hero {
-    padding: 0;
+    /* Margem de 60 px a partir de 1200 px; diminui até 0 nos 768 px para a composição caber no tablet. */
+    padding: clamp(0px, (100vw - 768px) * 0.1389, 60px);
     container-type: inline-size;
   }
   .hero__frame {
@@ -620,9 +621,9 @@ button {
   }
 }
 
-/* Tablet: mesma composição do desktop, com mínimos de texto mais baixos para caber
+/* Tablet e moldura até 1200 px (janela até 1320 px com a margem): mesma composição do desktop, com mínimos de texto mais baixos para caber
    na coluna à direita do rosto (460 unidades do desenho). */
-@media (min-width: 768px) and (max-width: 1199.98px) {
+@media (min-width: 768px) and (max-width: 1319.98px) {
   .hero__brand {
     font-size: calc(var(--u) * 40);
   }
