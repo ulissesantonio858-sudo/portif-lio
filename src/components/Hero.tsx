@@ -1,6 +1,8 @@
+import { useRef } from 'react'
 import { CONTACT_CONFIG, HERO, SITE } from '../content/portfolio'
 import { media } from '../media'
 import { ArrowLink } from './ArrowButton'
+import { HeroPortrait } from './HeroPortrait'
 import { Navigation, type NavLink } from './Navigation'
 
 const SOCIALS = [
@@ -10,20 +12,11 @@ const SOCIALS = [
 ].filter((s): s is typeof s & { href: string } => Boolean(s.href))
 
 export function Hero({ links }: { links: NavLink[] }) {
+  const frameRef = useRef<HTMLDivElement>(null)
   return (
     <div className="hero" id="inicio">
-      <div className="hero__frame">
-        <img
-          className="hero__portrait"
-          src={media('hero-ulisses-1813.webp')}
-          srcSet={`${media('hero-ulisses-960.webp')} 960w, ${media('hero-ulisses-1813.webp')} 1813w`}
-          sizes="(min-width: 768px) 95vw, 100vw"
-          width={1813}
-          height={1110}
-          alt="Retrato de Ulisses Antônio, de t-shirt preta, com iluminação roxa"
-          fetchPriority="high"
-          decoding="async"
-        />
+      <div className="hero__frame" ref={frameRef}>
+        <HeroPortrait areaRef={frameRef} />
 
         <header className="hero__bar">
           <a className="hero__brand" href="#inicio">
