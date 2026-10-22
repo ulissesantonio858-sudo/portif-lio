@@ -166,7 +166,7 @@ button {
 .hero {
   max-width: var(--max-page);
   margin: 0 auto;
-  padding: 10px;
+  padding: 10px 10px 0;
 }
 
 .hero__frame {
@@ -459,6 +459,7 @@ button {
   .hero {
     /* Margem de 60 px a partir de 1200 px; diminui até 0 nos 768 px para a composição caber no tablet. */
     padding: clamp(0px, (100vw - 768px) * 0.1389, 60px);
+    padding-bottom: 0;
     container-type: inline-size;
   }
   .hero__frame {
