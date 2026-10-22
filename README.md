@@ -45,7 +45,7 @@ Em `npm run preview` não há `/api`, por isso o formulário mostra erro localme
 ## Pendências
 
 1. **Retrato:** `public/media/hero-ulisses-*.webp` foi gerado a partir de uma cópia WebP (1813 × 1110, com transparência) da composição, não do PNG original de 2,5 MB. Visualmente está bem, mas convém regenerar os dois WebP a partir do PNG original exportado do Figma (nó `163:22`).
-2. **Contactos:** Facebook por configurar (URL da página) e envio de email por ativar (ver acima) em `CONTACT_CONFIG`. O WhatsApp usa o link curto `https://w.app/dawotd`, fornecido pelo Ulisses; o domínio `w.app` não está documentado pelo WhatsApp (o oficial é `wa.me`), por isso confirmar que abre a conversa certa. Com um link `wa.me/<número>`, a mensagem sugerida passa a ir pré-preenchida.
+2. **Contactos:** Facebook por configurar (URL da página) e envio de email por ativar (ver acima) em `CONTACT_CONFIG`. O WhatsApp usa `https://wa.me/351923787147`, com a mensagem sugerida pré-preenchida.
 3. **Projetos:** Elevon.pt está como rascunho (`published: false`): confirmar a descrição da participação (manutenção), tecnologias, URL e imagem antes de publicar.
 4. **Depoimentos:** nenhum; a secção só aparece com testemunhos reais.
 5. **`wordpress.svg`:** o “P” de “WORDPRESS” falta no próprio export do Figma.
