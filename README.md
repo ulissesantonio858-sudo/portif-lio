@@ -31,6 +31,10 @@ O `capture` usa o Chrome instalado; noutro browser: `CHROME_PATH=/caminho/chrome
 - **Tipografia:** Clash Display Medium (500), Semibold (600) e Bold (700), convertidas de OTF para WOFF2, com preload da Medium; Inter 400/500/600 via `@fontsource`. A 1920 px: Developer 647 px (Figma 659, −1,8 %), & 90 px (101), Web Designer 1166 px (1184, −1,5 %), sem ajuste de `letter-spacing`. Nota: `document.fonts.check('500 40px "Clash Display"')` devolve `true` mesmo sem a fonte; o `npm run capture` reporta `clashLoaded`, que verifica faces efetivamente carregadas.
 - **Ícones sociais:** Facebook, Instagram e WhatsApp na hero, pela ordem do Figma.
 
+## Política de privacidade
+
+Página própria em `/privacidade` (`privacidade.html`, texto em `src/content/privacy.ts`), ligada no rodapé. Descreve só o que o site faz hoje: formulário enviado por email via Resend, alojamento na Vercel, links externos, **sem cookies, sem armazenamento no navegador e sem analytics** (verificado no código). Se acrescentares analytics, pixels, fontes externas ou outro serviço, atualiza o texto e a data. É um rascunho cuidado, não aconselhamento jurídico: vale a pena uma revisão profissional.
+
 ## Ativar o envio de email (uma vez)
 
 1. Criar conta em https://resend.com e gerar uma API key (permissão “Sending access”).

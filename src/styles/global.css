@@ -1489,10 +1489,18 @@ button {
 /* ---------- Rodapé ---------- */
 .footer {
   display: grid;
-  gap: 14px;
+  gap: clamp(32px, 4vw, 56px);
   max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(64px, 7vw, 110px) var(--gutter) 40px;
+  padding: clamp(64px, 7vw, 110px) var(--gutter) 36px;
+}
+.footer__top {
+  display: grid;
+  gap: 24px;
+}
+.footer__id {
+  display: grid;
+  gap: 14px;
 }
 .footer__brand {
   font-family: var(--f-display);
@@ -1509,26 +1517,127 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 8px;
-  margin: 6px 0 0 -12px;
+  margin: 0 0 0 -12px;
   padding: 0;
   list-style: none;
 }
-.footer__links a {
+.footer__links a,
+.footer__legal {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 12px;
   font-weight: 600;
   text-decoration: none;
 }
-.footer__links a:hover {
+.footer__links a {
+  padding: 0 12px;
+}
+.footer__links a:hover,
+.footer__legal:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--c-line);
+}
 .footer__copy {
-  margin-top: 20px;
   font-size: 14px;
   color: var(--c-muted);
+}
+.footer__legal {
+  font-size: 14px;
+  color: var(--c-body);
+}
+@media (min-width: 768px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+  .footer__links {
+    justify-content: flex-end;
+    margin: 0 -12px 0 0;
+  }
+}
+
+/* ---------- Política de privacidade ---------- */
+.legal-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px var(--gutter);
+}
+.legal-bar__brand {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 22px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.legal-bar__back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--c-lavender);
+}
+.legal-bar__back:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.legal {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 80px) var(--gutter) 0;
+}
+.legal__title {
+  font-size: clamp(34px, 4.4vw, 60px);
+  color: #f5efff;
+  text-wrap: balance;
+}
+.legal__updated {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--c-muted);
+}
+.legal__intro {
+  margin-top: 28px;
+  font-size: clamp(17px, 1.3vw, 19px);
+}
+.legal__section {
+  margin-top: 40px;
+}
+.legal__section h2 {
+  font-size: clamp(22px, 1.8vw, 28px);
+  color: #fff;
+}
+.legal__section p {
+  margin-top: 12px;
+  color: var(--c-muted);
+}
+.legal__contact {
+  margin-top: 40px;
+}
+.legal__contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: var(--r-pill);
+  background: var(--c-purple-active);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 /* ---------- Movimento ---------- */
