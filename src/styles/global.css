@@ -177,6 +177,12 @@ button {
     'media'
     'pitch'
     'social';
+  /* Primeira dobra: a moldura ocupa o ecrã e a foto fica com o espaço que sobra
+     (mínimo 260 px; em ecrãs muito baixos a moldura cresce em vez de sobrepor). */
+  grid-template-rows: auto minmax(260px, 1fr) auto auto;
+  height: calc(100vh - 10px);
+  height: calc(100svh - 10px);
+  min-height: min-content;
   gap: 10px;
   padding: 10px;
   border-radius: 30px;
@@ -185,12 +191,17 @@ button {
 }
 
 .hero__portrait {
-  --portrait-pos: 54% 30%;
-  --portrait-fit: cover;
+  /* A imagem mostra só a zona sem recortes transparentes do PNG (x 315–1397 de 1813 px):
+     largura = 1813/1082 do contentor, ou o suficiente para cobrir a altura. */
+  --img-w: max(167.56cqw, 163.33cqh);
+  --img-left: calc(50cqw - var(--img-w) * 0.4721);
+  --portrait-fit: var(--img-w) auto;
+  --portrait-pos: var(--img-left) 0;
   grid-area: media;
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  min-height: 0;
+  container-type: size;
   overflow: hidden;
   border-radius: 22px;
   background: #12061f;
@@ -199,11 +210,12 @@ button {
 }
 .hero__portrait-img {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: var(--portrait-pos);
+  top: 0;
+  left: var(--img-left);
+  width: var(--img-w);
+  height: auto;
+  max-width: none;
+  aspect-ratio: 1813 / 1110;
 }
 
 /* Spotlight: raio de 260 px; a camada luminosa só aparece dentro desta máscara. */
@@ -444,13 +456,48 @@ button {
 /* Telemóvel grande: proporção ≤ 0,975 para o enquadramento evitar os recortes
    transparentes da composição (x < 315 e x > 1397 nos cantos do PNG de 1813 px). */
 @media (min-width: 600px) and (max-width: 767.98px) {
-  .hero__portrait {
-    aspect-ratio: 0.95;
-    --portrait-pos: 43% 50%;
-  }
   .hero__title {
     padding: 0 32px 32px;
     font-size: clamp(56px, 9.4vw, 72px);
+  }
+}
+
+/* Telemóveis baixos (iPhone SE, Android antigos): compacta tipografia e espaços para a
+   hero caber na primeira dobra, sem mudar textos nem tapar o rosto. */
+@media (max-width: 767.98px) and (max-height: 740px) {
+  .hero__frame {
+    grid-template-rows: auto minmax(200px, 1fr) auto auto;
+    gap: 8px;
+    padding: 8px;
+  }
+  .hero__bar {
+    padding-block: 0;
+  }
+  .hero__title {
+    padding: 0 14px 12px;
+    font-size: clamp(30px, 9.2vw, 40px);
+  }
+  .hero__pitch {
+    gap: 8px;
+    padding: 14px 16px;
+  }
+  .hero__pitch-title {
+    font-size: 18px;
+  }
+  .hero__pitch-text {
+    font-size: 14px;
+    line-height: 1.42;
+  }
+  .hero__cta {
+    margin-top: 2px;
+    --btn-h: 46px;
+    --btn-icon: 38px;
+  }
+  .hero__social a {
+    min-height: 40px;
+  }
+  .hero__social img {
+    height: 24px;
   }
 }
 
@@ -458,14 +505,19 @@ button {
 @media (min-width: 768px) {
   .hero {
     /* Margem de 60 px a partir de 1200 px; diminui até 0 nos 768 px para a composição caber no tablet. */
-    padding: clamp(0px, (100vw - 768px) * 0.1389, 60px);
-    padding-bottom: 0;
+    --hero-pad: clamp(0px, (100vw - 768px) * 0.1389, 60px);
+    padding: var(--hero-pad) var(--hero-pad) 0;
+    /* Primeira dobra: a moldura (1920 × 1227) nunca fica mais alta do que o ecrã. */
+    max-width: min(var(--max-page), calc((100vh - var(--hero-pad)) * 1.5648 + var(--hero-pad) * 2));
+    max-width: min(var(--max-page), calc((100svh - var(--hero-pad)) * 1.5648 + var(--hero-pad) * 2));
     container-type: inline-size;
   }
   .hero__frame {
     --u: calc(100cqw / 1920);
     display: block;
     aspect-ratio: 1920 / 1227;
+    height: auto;
+    min-height: 0;
     padding: 0;
     border-radius: calc(var(--u) * 50);
     background: radial-gradient(120% 120% at 50% 50%, var(--c-lavender) 60%, #c2aef7 100%);
@@ -473,6 +525,8 @@ button {
   }
   .hero__portrait {
     --portrait-fit: 100% 100%;
+    --portrait-pos: 0 0;
+    container-type: normal;
     position: absolute;
     left: calc(var(--u) * 52);
     top: calc(var(--u) * 38);
@@ -483,6 +537,10 @@ button {
     background: none;
   }
   .hero__portrait-img {
+    left: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
     object-fit: fill;
   }
   .hero__bar {
@@ -622,9 +680,9 @@ button {
   }
 }
 
-/* Tablet e moldura até 1200 px (janela até 1320 px com a margem): mesma composição do desktop, com mínimos de texto mais baixos para caber
+/* Moldura com menos de 1200 px (tablet, ou portátil baixo como 1366 × 768): mesma composição do desktop, com mínimos de texto mais baixos para caber
    na coluna à direita do rosto (460 unidades do desenho). */
-@media (min-width: 768px) and (max-width: 1319.98px) {
+@container (max-width: 1199.98px) {
   .hero__brand {
     font-size: calc(var(--u) * 40);
   }
