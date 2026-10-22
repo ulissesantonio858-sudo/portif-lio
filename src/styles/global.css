@@ -251,6 +251,28 @@ button {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
+/* Vídeo do sorriso: mesma caixa da fotografia, recortado pela transparência do PNG
+   (cantos da moldura). Fica invisível até o primeiro fotograma estar desenhado. */
+.hero__portrait-video {
+  object-fit: fill;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms linear;
+  -webkit-mask-image: var(--portrait-mask);
+  mask-image: var(--portrait-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.hero__portrait[data-video='on'] .hero__portrait-video {
+  opacity: 1;
+}
+/* A cópia luminosa é da fotografia séria: com o vídeo a correr, fica só o brilho. */
+.hero__portrait[data-video='on'] .hero__portrait-lit {
+  opacity: 0;
+}
+
 /* Realce roxo/lavanda em "screen", recortado pela silhueta da própria imagem. */
 .hero__portrait-tint {
   position: absolute;

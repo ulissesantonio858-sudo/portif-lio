@@ -1,14 +1,32 @@
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from 'react'
 import { media } from '../media'
+import { useHeroVideo, type VideoSource } from './useHeroVideo'
 
 const SRC = media('hero-ulisses-1813.webp')
 const SRC_SET = `${media('hero-ulisses-960.webp')} 960w, ${SRC} 1813w`
 const SIZES = '(min-width: 768px) 95vw, 100vw'
+// Mesmo enquadramento do PNG (1813 × 1110): 1.º fotograma alinhado com a fotografia.
+const VIDEO_SOURCES: VideoSource[] = [
+  { src: media('hero-ulisses-sorriso.webm'), type: 'video/webm; codecs="vp9"' },
+  { src: media('hero-ulisses-sorriso.mp4'), type: 'video/mp4; codecs="avc1.640028"' },
+]
 const OFFSCREEN = -999
 // current += (target - current) * 0.1 por frame a 60 fps; normalizado pelo tempo real do frame
 // para a luz ter a mesma velocidade em ecrãs de 30, 60 ou 120 Hz.
 const EASE = 0.1
 const FRAME_MS = 1000 / 60
+
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(true)
+  useEffect(() => {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReduced(motion.matches)
+    update()
+    motion.addEventListener('change', update)
+    return () => motion.removeEventListener('change', update)
+  }, [])
+  return reduced
+}
 
 // Só com rato e sem "reduzir movimento"; em ecrãs táteis a fotografia fica estática.
 function useSpotlightEnabled() {
@@ -35,7 +53,10 @@ function useSpotlightEnabled() {
  */
 export function HeroPortrait({ areaRef }: { areaRef: RefObject<HTMLElement | null> }) {
   const enabled = useSpotlightEnabled()
+  const reducedMotion = useReducedMotion()
   const boxRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  useHeroVideo({ area: areaRef, box: boxRef, video: videoRef }, VIDEO_SOURCES, !reducedMotion)
   const pointer = useRef({ x: OFFSCREEN, y: OFFSCREEN, present: false })
   const current = useRef({ x: OFFSCREEN, y: OFFSCREEN })
   const wasInside = useRef(false)
@@ -135,6 +156,22 @@ export function HeroPortrait({ areaRef }: { areaRef: RefObject<HTMLElement | nul
         fetchPriority="high"
         decoding="async"
       />
+      {!reducedMotion && (
+        // Começa invisível e sem src; a fotografia acima faz de poster até haver um fotograma.
+        <video
+          ref={videoRef}
+          className="hero__portrait-img hero__portrait-video"
+          width={1176}
+          height={720}
+          muted
+          playsInline
+          preload="none"
+          disablePictureInPicture
+          disableRemotePlayback
+          aria-hidden="true"
+          tabIndex={-1}
+        />
+      )}
       {enabled && (
         <>
           <img className="hero__portrait-img hero__portrait-lit" src={SRC} srcSet={SRC_SET} sizes={SIZES} width={1813} height={1110} alt="" aria-hidden="true" decoding="async" />
