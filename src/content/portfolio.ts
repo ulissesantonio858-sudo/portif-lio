@@ -17,8 +17,8 @@ export const CONTACT_CONFIG = {
   // Por configurar: não usar valores provisórios.
   email: null as string | null,
   // wa.me/<número>: a mensagem sugerida do contacto segue pré-preenchida.
-  whatsapp: 'https://wa.me/351923787147' as string | null,
-  facebook: null as string | null,
+  whatsapp: 'https://wa.me/351936787147' as string | null,
+  facebook: 'https://www.facebook.com/profile.php?id=61594543035460' as string | null,
 }
 
 export const HERO = {
