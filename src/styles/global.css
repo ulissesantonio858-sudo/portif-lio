@@ -504,8 +504,8 @@ button {
 /* Composição do desktop (também no tablet): coordenadas relativas ao frame de 1920 px */
 @media (min-width: 768px) {
   .hero {
-    /* Margem de 60 px a partir de 1200 px; diminui até 0 nos 768 px para a composição caber no tablet. */
-    --hero-pad: clamp(0px, (100vw - 768px) * 0.1389, 60px);
+    /* Margem de 40 px a partir de 1200 px; diminui até 0 nos 768 px para a composição caber no tablet. */
+    --hero-pad: clamp(0px, (100vw - 768px) * 0.0926, 40px);
     padding: var(--hero-pad) var(--hero-pad) 0;
     /* Primeira dobra: a moldura (1920 × 1227) nunca fica mais alta do que o ecrã. */
     max-width: min(var(--max-page), calc((100vh - var(--hero-pad)) * 1.5648 + var(--hero-pad) * 2));
